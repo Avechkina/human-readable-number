@@ -11,18 +11,24 @@ console.log(arrOfNumb);
 module.exports = function toReadable (number) {
 
     let str = '';
-    if (number < 20) {
-       str = arrOfNumb[number];
-    } else if (number < 100) {
-        str = arrOfNumb[number-number%10] + ' ' + arrOfNumb[number%10];
-
+    if (number > 99) {
+      str = arrOfNumb[parseInt(number/100)] + ' hundred';
     }
-    else if (number%100 === 0) {
-      str = arrOfNumb[number/100] + ' hundred';
+    if (number%100 === 0) {
+      if (number === 0) str = arrOfNumb[number];
+      return str;}
+    if (number%100 < 21)  {
+      str += ' ' + arrOfNumb[number%100];
+   } 
+   else if (number%10 === 0) {
+       str += ' ' + arrOfNumb[number%100];
 
-    } else {
-        str = arrOfNumb[parseInt(number/100)] + ' hundred ' + arrOfNumb[number%100-number%10] + ' ' + arrOfNumb[number%10];
+   }
+   else {
+    str +=  ' '  + arrOfNumb[number%100-number%10] + ' ' + arrOfNumb[number%10];
+   }
 
-    }
-    return str;
+   if (number === 0) str = arrOfNumb[number];
+
+    return str.trim();
 }
