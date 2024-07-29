@@ -10,15 +10,18 @@ arrOfNumb[100] = 'hundred';
 console.log(arrOfNumb);
 module.exports = function toReadable (number) {
 
-let str = '';
+    let str = '';
     if (number < 20) {
        str = arrOfNumb[number];
-    } else if (number.length === 2) {
-        str = arrOfNumb[parseInt(number/10)] + ' ' + arrOfNumb[number%10];
+    } else if (number < 100) {
+        str = arrOfNumb[number-number%10] + ' ' + arrOfNumb[number%10];
 
     }
-    else if (number.length === 3) {
-        str = arrOfNumb[parseInt(number/100)] + ' ' + arrOfNumb[parseInt(number/10)] + ' ' + arrOfNumb[number%10];
+    else if (number%100 === 0) {
+      str = arrOfNumb[number/100] + ' hundred';
+
+    } else {
+        str = arrOfNumb[parseInt(number/100)] + ' hundred ' + arrOfNumb[number%100-number%10] + ' ' + arrOfNumb[number%10];
 
     }
     return str;
